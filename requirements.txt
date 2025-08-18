@@ -1,3 +1,4 @@
 gradio
-pydantic
-ollama
+pydantic~=2.11.7
+ollama~=0.5.3
+pillow~=11.3.0
