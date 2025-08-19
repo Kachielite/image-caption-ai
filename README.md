@@ -92,5 +92,3 @@ Specify your license here (e.g., MIT, Apache 2.0, etc.)
 - [Ollama](https://ollama.com/) for local LLM serving
 - [Hugging Face](https://huggingface.co/) for open-source models
 
----
-Feel free to modify this README to better fit your project's specifics.
