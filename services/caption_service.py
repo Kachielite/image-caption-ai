@@ -27,21 +27,23 @@ class CaptionService:
         )
 
     @staticmethod
-    def get_user_prompt() -> str:
+    def get_user_prompt(hint: str) -> str:
         user_instructions = (
             "Analyze the product shown in the image.\n"
             "Return ONLY the JSON object (no markdown, no extra text).\n"
         )
+        if hint and hint.strip():
+            user_instructions += f"Hint: {hint.strip()}\n"
         return user_instructions
 
-    def generate_caption(self, image_path: str) -> str:
+    def generate_caption(self, image_path: str, hint: str) -> str:
         system_prompt = Prompt(
             role="system",
             content=self.get_system_prompt()
         )
         user_prompt = Prompt(
             role="user",
-            content=self.get_user_prompt(),
+            content=self.get_user_prompt(hint),
             images=[image_path]
         )
         request = CaptionRequest(prompt=[system_prompt, user_prompt])

@@ -6,10 +6,10 @@ class CaptionUI:
     def __init__(self, model_name: str):
         self.caption_service = CaptionService(model_name)
 
-    def caption_image(self, image):
+    def caption_image(self, image, hint: str = "") -> dict:
         try:
             # Get the JSON string from the caption service
-            json_response = self.caption_service.generate_caption(image)
+            json_response = self.caption_service.generate_caption(image, hint)
 
             # Clean up the response - remove markdown code blocks if present
             cleaned_response = self.clean_json_response(json_response)
@@ -60,7 +60,10 @@ class CaptionUI:
     def launch(self):
         interface = gr.Interface(
             fn=self.caption_image,
-            inputs=gr.Image(type="filepath"),
+            inputs=[
+                gr.Image(type="filepath"),
+                gr.Textbox(label="Hint (optional)", placeholder="Enter a hint about the image")
+            ],
             outputs=gr.JSON(label="Product Information"),
             title="AI Product Content Generator",
             description="Upload a product image to generate an optimized title, description, and SEO keywords in JSON format."
